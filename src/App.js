@@ -1,26 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components"
+import Home from "./components/Home"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Carrinho from "./components/Carrinho"
+
+const DivContainer = styled.div`
+  margin:0;
+  padding:0;
+  width: 100vw;
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+`
+ 
+class App extends React.Component {
+  state = {
+    pagina: "Home"
+  }
+  onClickMudarPagina = () =>{
+      this.setState({
+        pagina: "Carrinho"
+      })
+ }
+  rederizaTela = () => { 
+  switch (this.state.pagina ) {
+    case "Home":
+      return (<div>
+      <Home mudarPagina={this.onClickMudarPagina}
+      
+      /> 
+         </div>
+       )
+      case "Carrinho":
+        return (<div>Aqui"</div>)
+      // default:
+        // return (<div>Aqui2</div>)
+    }
+  }
+
+  render () {
+  return ( <DivContainer>
+      {this.rederizaTela()}
+    </DivContainer>
+  )
 }
-
+}
 export default App;
