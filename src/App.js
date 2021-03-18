@@ -18,9 +18,15 @@ class App extends React.Component {
     pagina: "Home"
   }
   onClickMudarPagina = () =>{
+    if(this.state.pagina === "Home")
       this.setState({
         pagina: "Carrinho"
       })
+      else{
+        this.setState({
+          pagina: "Home"
+        })
+      }
  }
   rederizaTela = () => { 
   switch (this.state.pagina ) {
@@ -32,9 +38,10 @@ class App extends React.Component {
          </div>
        )
       case "Carrinho":
-        return (<div>Aqui"</div>)
-      // default:
-        // return (<div>Aqui2</div>)
+        return (<div>
+          <Carrinho mudarPagina={this.onClickMudarPagina}
+          
+          /> </div>)
     }
   }
 
