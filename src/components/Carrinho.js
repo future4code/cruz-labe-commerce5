@@ -18,7 +18,6 @@ const DivTopo = styled.div`
     align-items:center;
     /* background-color: blue; */
 `
-
 const BotaoCarrinho = styled.button`
 height: 50px;
 width: 80px;
@@ -63,7 +62,6 @@ export default class Carrinho extends React.Component {
    
     state = {
         produtos: produtosInicial,
-        valorTotal: 0
     }
     atualizarValor = () => {
         let valor = 0; 
@@ -87,7 +85,6 @@ export default class Carrinho extends React.Component {
             valorTotal:this.atualizarValor()
         })
     }
-    
     addProduto(id){
         const produtos = this.state.produtos;
 
