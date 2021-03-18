@@ -8,7 +8,6 @@ const DivContainer = styled.div `
      justify-content: start;
     flex-direction: column;
 `
-
 const Filtro = styled.div`
     height: 8vh;
     width: 100vw;
@@ -86,10 +85,19 @@ export default class Home extends React.Component{
         valorMaximo: 0,
     }
 
-    componentDidUpdate() {
-        localStorage.setItem("Produtos", this.state.produtos)
+    componentDidMount() {
+        if(localStorage.getItem("Produtos")!==null ){
+            this.setState({
+                produtos: JSON.parse(localStorage.getItem("Produtos"))
+            })
+        }
+        else{
+            localStorage.setItem("Produtos", JSON.stringify(this.state.produtos))
+        }
     }
-    
+    componentDidUpdate() {
+        localStorage.setItem("Produtos", JSON.stringify(this.state.produtos))
+    }
 
     handleMinimo = (event) => {
         this.setState({valorMinimo: event.target.value})
