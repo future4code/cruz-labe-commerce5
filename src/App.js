@@ -7,10 +7,11 @@ import Carrinho from "./components/Carrinho"
 const DivContainer = styled.div`
   margin:0;
   padding:0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display:flex;
   flex-direction: column;
+  box-sizing: border-box;
 `
  
 class App extends React.Component {

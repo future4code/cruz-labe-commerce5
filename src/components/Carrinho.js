@@ -1,27 +1,37 @@
 import React from 'react';
 import styled from "styled-components"
-
+import sair from './../img/cancel-1_icon-icons.com_69552.ico'
 const DivContainer = styled.div`
     height:85vh;
-    width: 100vw;
+    width: 100%;
     display:flex;
      justify-content: start;
     flex-direction: column;
 `
 
 const DivTopo = styled.div`
-   height: 8vh;
-    width: 100vw;
+   /* height: 8vh; */
+    width: 100%;
     display:flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items:center;
     /* background-color: blue; */
 `
-const BotaoCarrinho = styled.button`
-height: 50px;
-width: 80px;
-`
+const BotaoCarrinho = styled.img `
+height: 70px;
+width: 70px;
+position: fixed;
+cursor: pointer;
+bottom: 10px;
+right: 10px;
+border-radius: 50%;
+border: solid  white 2px;
+:hover{
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(48,8,111,1) 35%, rgba(48,8,111,1) 70%);
+    border: solid  rgba(48,8,111,1) 2px;
+}
+` 
 const ListaProdutos = styled.div`
  display: flex;
  flex-direction:column;
@@ -65,7 +75,6 @@ export default class Carrinho extends React.Component {
     }
     atualizarValor = () => {
         let valor = 0; 
-        console.log("C", valor);
         (this.state.produtos).forEach((item) => {
             if(item.quantidade > 0){ 
                 valor += item.value * item.quantidade;
@@ -78,11 +87,7 @@ export default class Carrinho extends React.Component {
 
     componentWillMount() {
         this.setState({
-            produtos: JSON.parse(localStorage.getItem("Produtos")),
-          
-        })
-        this.setState({
-            valorTotal:this.atualizarValor()
+            produtos: JSON.parse(localStorage.getItem("Produtos"))
         })
     }
     addProduto(id){
@@ -92,8 +97,7 @@ export default class Carrinho extends React.Component {
              if(item.id === id){
              let produtosAtualizado = [...this.state.produtos];
                 produtosAtualizado[index].quantidade =  produtosAtualizado[index].quantidade + 1;
-                this.setState({produtos: produtosAtualizado,
-                    valorTotal: this.atualizarValor()
+                this.setState({produtos: produtosAtualizado
                 })
              }
         })
@@ -108,8 +112,7 @@ export default class Carrinho extends React.Component {
              if(item.id === id){
              let produtosAtualizado = [...this.state.produtos];
                 produtosAtualizado[index].quantidade =  produtosAtualizado[index].quantidade - 1;
-                this.setState({produtos: produtosAtualizado,
-                    valorTotal: this.atualizarValor()
+                this.setState({produtos: produtosAtualizado
                 })
              }
         })
@@ -144,7 +147,8 @@ export default class Carrinho extends React.Component {
     render() {
         return (<DivContainer >
             <DivTopo>
-                <BotaoCarrinho onClick={this.props.mudarPagina}>Home</BotaoCarrinho>
+                
+            <BotaoCarrinho onClick={this.props.mudarPagina} src={sair}></BotaoCarrinho>
             </DivTopo>
             <ListaProdutos>
                 <h2>Lista de compras</h2>
@@ -153,7 +157,7 @@ export default class Carrinho extends React.Component {
                         <div>
                             <h3>Total</h3>
                         </div>
-                        <DivValor><h3>R$ {this.state.valorTotal}</h3></DivValor>
+                        <DivValor><h3>R$ {this.atualizarValor()}</h3></DivValor>
                     </DivProdutoCarrinho>
 
             </ListaProdutos>
