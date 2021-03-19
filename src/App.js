@@ -11,6 +11,7 @@ const DivContainer = styled.div`
   height: 100vh;
   display:flex;
   flex-direction: column;
+  box-sizing: border-box;
 `
  
 class App extends React.Component {

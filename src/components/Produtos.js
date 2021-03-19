@@ -1,18 +1,11 @@
 import React from 'react';
 import styled from "styled-components"
 
-
-
-const DivContainer = styled.div`
+const DivContainerProdutos = styled.div`
  display: flex;
  flex-wrap: wrap;
-`
-
-const Informacoes = styled.div`
-display:flex;
-align-items: center;
-justify-content: space-around;
-width: 100%;
+ max-width: 1000px;
+ align-self: center;
 `
 
 const DivProduto = styled.div`
@@ -20,50 +13,69 @@ const DivProduto = styled.div`
     width: 200px;
     
   img{
+        width: 200px;
+        height: 200px;
+    }
+    h3{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70px;
+        margin: 0px;
+        text-align: center;
+    }
+    h4{
+        margin: 0px;
+        text-align: center;
+    }
+    button{
         width: 100%;
+        padding: 10px 0px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color:  #c5aae9;
+            color: black;
+        :hover{
+            background-color: rgba(48,8,111,1);
+            color: white;
+        }
     }
 `
 
 class Produtos extends React.Component {
-    state = {
-        sort: "Decrescente"
-    }
-
 filtrarProdutos = () => {
+    if(this.props.ordenacao){
     return this.props.produto
     .filter((produto) => this.props.valorMaximo ? produto.value < this.props.valorMaximo : true)
     .filter((produto) => this.props.valorMinimo ? produto.value > this.props.valorMinimo : true)
-    .filter((produto) => this.props.valorNome ? produto.name.includes(this.props.valorNome) : true)
-    .sort((a, b) => this.state.sort === 'CRESCENTE' ? a.value - b.value : b.value - a.value)
+    .filter((produto) => this.props.valorNome ? (produto.name.toUpperCase()).includes(this.props.valorNome.toUpperCase()) : true)
+    .sort((a, b) => this.props.ordenacao === 'CRESCENTE' ? a.value - b.value : b.value - a.value)
+    }
+    else{
+        return this.props.produto
+        .filter((produto) => this.props.valorMaximo ? produto.value < this.props.valorMaximo : true)
+    .filter((produto) => this.props.valorMinimo ? produto.value > this.props.valorMinimo : true)
+    .filter((produto) => this.props.valorNome ? (produto.name.toUpperCase()).includes(this.props.valorNome.toUpperCase()) : true)
+    }
 }
 
-mudarOrdenacao = (event) => {
-    this.setState({sort: event.target.value})
-}
+
 
 render() {
     const listaFiltrada = this.filtrarProdutos()
     return (
-            <DivContainer>
-                <Informacoes>
-            <p>Quantidade de produtos: {listaFiltrada.length}</p>
-            <label>
-             Ordenação:
-            <select value={this.state.sort} onChange={this.mudarOrdenacao}>
-            <option value={'CRESCENTE'}>Crescente</option>
-            <option value={'DECRESCENTE'}>Decrescente</option>
-          </select>
-        </label>
-        </Informacoes>
+            <DivContainerProdutos>
+                
             {listaFiltrada.map((item) => {
                 return (<DivProduto>
                             <img src={item.imgUrl}/>
                              <h3>{item.name}</h3>
-                             <h3>R$ {item.value}</h3>
+                             <h4>R$ {item.value}</h4>
                              <button onClick={() => this.props.compraProduto(item.id)}>Comprar</button>  
-                         </DivProduto>)}) 
+                         </DivProduto>)})
             }
-            </DivContainer>
+            </DivContainerProdutos>
     )
 }
 
