@@ -27,10 +27,8 @@ const DivContainerFiltro = styled.div`
         outline: 0;
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
-}
     }
-    
-   
+}
 `
 const DivInputs = styled.div `
     flex-direction: row;
