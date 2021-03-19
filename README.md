@@ -1,5 +1,7 @@
 Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
 
+http://exciting-horse.surge.sh/
+
 Labenu Commerce - Grupo 5
 
 Este projeto foi realizado por Janaylla Firmino, Luciana Monteiro Mendonça e João Vítor Alves
