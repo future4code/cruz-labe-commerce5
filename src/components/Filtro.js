@@ -38,7 +38,6 @@ const DivInputs = styled.div `
  
 `
 
-
 const InputBusca = styled.input`
     width: 400px;
 `

@@ -71,7 +71,7 @@ render() {
                 return (<DivProduto>
                             <img src={item.imgUrl}/>
                              <h3>{item.name}</h3>
-                             <h4>R$ {item.value}</h4>
+                             <h4>R$ {item.value},00</h4>
                              <button onClick={() => this.props.compraProduto(item.id)}>Comprar</button>  
                          </DivProduto>)})
             }

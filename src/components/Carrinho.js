@@ -3,15 +3,15 @@ import styled from "styled-components"
 import sair from './../img/cancel-1_icon-icons.com_69552.ico'
 const DivContainer = styled.div`
     height:85vh;
-    width: 100vw;
+    width: 100%;
     display:flex;
      justify-content: start;
     flex-direction: column;
 `
 
 const DivTopo = styled.div`
-   height: 8vh;
-    width: 100vw;
+   /* height: 8vh; */
+    width: 100%;
     display:flex;
     flex-direction: row;
     justify-content: flex-end;

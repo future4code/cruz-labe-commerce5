@@ -29,7 +29,7 @@ import camisa24 from './../img/camisas/camisa-24.png'
 
 const DivContainerHome = styled.div `
     height:85vh;
-    width: 100vw;
+    width: 100%;
     display:flex;
      justify-content: start;
     flex-direction: column;
@@ -153,7 +153,7 @@ export default class Home extends React.Component{
           {
             id:17,
             name: "Balanço na lua minguante",
-            value: 32.40,
+            value: 32,
             imgUrl: camisa17, 
             quantidade: 0
           },
@@ -181,7 +181,7 @@ export default class Home extends React.Component{
           {
             id:21,
             name: "Astronauta em chamas",
-            value: 32.40,
+            value: 32,
             imgUrl: camisa21,
             quantidade: 0
           },
