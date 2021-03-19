@@ -16,7 +16,7 @@ const DivContainer = styled.div`
  
 class App extends React.Component {
   state = {
-    pagina: "Carrinho"
+    pagina: "Home"
   }
   onClickMudarPagina = () =>{
     if(this.state.pagina === "Home")
