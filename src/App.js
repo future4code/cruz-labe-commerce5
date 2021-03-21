@@ -34,7 +34,7 @@ class App extends React.Component {
     case "Home":
       return (<div>
       <Home mudarPagina={this.onClickMudarPagina}
-      
+
       /> 
          </div>
        )

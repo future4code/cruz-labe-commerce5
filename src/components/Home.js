@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components"
+import styled, {keyframes} from "styled-components"
 import Filtro from './Filtro.js'
 import Produtos from './Produtos.js';
 import camisa1 from './../img/camisas/camisa-1.jpg'
@@ -27,14 +27,81 @@ import camisa22 from './../img/camisas/camisa-22.jpg'
 import camisa23 from './../img/camisas/camisa-23.jpg'
 import camisa24 from './../img/camisas/camisa-24.png'
 
+
+import banner1 from './../img/carrocel/1.png'
+import banner2 from './../img/carrocel/2.png'
+import banner3 from './../img/carrocel/3.png'
+
 const DivContainerHome = styled.div `
-    height:85vh;
     width: 100%;
     display:flex;
      justify-content: start;
     flex-direction: column;
 `
+const DivSlider = styled.div`
+  width: auto;
+  height: 30vw;
+  text-align: center;
+  overflow:hidden;
+`
 
+const movimentar = keyframes`
+    0%{
+      transform: translateX(0);
+    }
+    15%{
+      transform: translateX(-0%);
+    }
+    25%{
+      transform: translateX(-0%);
+    }
+    40%{
+      transform: translateX(-25%);
+    }
+    50%{
+      transform: translateX(-25%);
+    }
+    65%{
+      transform: translateX(-50%);
+    }
+    75%{
+      transform: translateX(-50%);
+    }
+    90%{
+      transform: translateX(-75%);
+    }
+    100%{
+      transform: translateX(-75%);
+    }
+`
+const DivImagens = styled.div`
+width: 400vw;
+    height: 100%;
+    display: flex;
+
+          animation-name: ${movimentar};
+            animation-duration: 15s;
+            animation-direction: normal;
+            animation-iteration-count: infinite;
+            animation-timing-function:cubic-bezier(0,0,1,1);
+  div{
+    width: 100vw;
+    height: 100%;
+    background-size:100% 100%;
+  }
+  div:nth-child(1) {
+    background-image: url(${banner1});
+  }
+  div:nth-child(2) {
+    background-image: url(${banner2});
+}
+div:nth-child(3) {
+  background-image: url(${banner3});
+}
+div:nth-child(4) {
+  background-image: url(${banner1});
+}
+`
 export default class Home extends React.Component{
     state = {
         produtos: [
@@ -43,197 +110,193 @@ export default class Home extends React.Component{
             name: "Multi-espaço",
             value: 149,
             imgUrl: camisa1,
-            quantidade: 0
+            tamanho: ""
           },
           {
             id:2,
             name:  "Galáxia",
             value: 125,
             imgUrl: camisa2,
-            quantidade: 0
+            tamanho: ""
           },
           {
             id:3,
             name:  "Multi-espaço manga-longa",
             value: 200,
-            imgUrl: camisa3,
-            quantidade: 0
+            imgUrl: camisa3 ,
+            tamanho: ""
           },
           {
             id:4,
             name:  "Perdidos no espaço",
             value: 132,
-            imgUrl: camisa4,
-            quantidade: 0
+            imgUrl: camisa4 ,
+            tamanho: ""
           },
           {
             id:5,
             name: "Volta ao mundo",
             value: 116,
-            imgUrl: camisa5,
-            quantidade: 0
+            imgUrl: camisa5 ,
+            tamanho: ""
           },
           {
             id:6,
             name:  "Hello!",
             value: 100,
-            imgUrl: camisa6,
-            quantidade: 0
+            imgUrl: camisa6 ,
+            tamanho: ""
           },
           {
             id:7,
             name:  "Ready for Aliens 1",
             value: 200,
-            imgUrl: camisa7,
-            quantidade: 0
+            imgUrl: camisa7 ,
+            tamanho: ""
           },
           {
             id:8,
             name:  "Balanço",
             value: 100,
-            imgUrl: camisa8,
-            quantidade: 0
+            imgUrl: camisa8 ,
+            tamanho: ""
           },
           {
             id:9,
             name: "Escavação lunar",
             value: 99,
-            imgUrl: camisa9,
-            quantidade: 0
+            imgUrl: camisa9 ,
+            tamanho: ""
           },
           {
             id:10,
             name:  "Resgate",
             value: 89,
-            imgUrl: camisa10,
-            quantidade: 0
+            imgUrl: camisa10 ,
+            tamanho: ""
           },
           {
             id:11,
             name:  "Ready for Aliens 2",
             value: 200,
-            imgUrl: camisa11,
-            quantidade: 0
+            imgUrl: camisa11 ,
+            tamanho: ""
           },
           {
             id:12,
             name:  "Don’t believe in you either",
             value: 100,
-            imgUrl: camisa12,
-            quantidade: 0
+            imgUrl: camisa12 ,
+            tamanho: ""
           },
           {
             id:13,
-            name: "Gatto galátictico",
+            name: "Gato galático",
             value: 99,
-            imgUrl: camisa13,
-            quantidade: 0
+            imgUrl: camisa13 ,
+            tamanho: ""
           },
           {
             id:14,
             name:  "I love space",
             value: 10,
-            imgUrl: camisa14,
-            quantidade: 0
+            imgUrl: camisa14 ,
+            tamanho: ""
           },
           {
             id:15,
             name:  "Of space",
             value: 200,
-            imgUrl: camisa15,
-            quantidade: 0
+            imgUrl: camisa15 ,
+            tamanho: ""
           },
           {
             id:16,
             name:  "Pesca lunar",
             value: 100,
-            imgUrl: camisa16,
-            quantidade: 0
+            imgUrl: camisa16 ,
+            tamanho: ""
           },
           {
             id:17,
             name: "Balanço na lua minguante",
             value: 32,
             imgUrl: camisa17, 
-            quantidade: 0
+            quantidade: 0,
+            tamanho: ""
           },
           {
             id:18,
             name:  "Grama na lua",
             value: 10,
-            imgUrl: camisa18,
-            quantidade: 0
+            imgUrl: camisa18 ,
+            tamanho: ""
           },
           {
             id:19,
             name:  "Light space",
             value: 200,
-            imgUrl: camisa19,
-            quantidade: 0
+            imgUrl: camisa19 ,
+            tamanho: ""
           },
           {
             id:20,
             name:  "Laika",
             value: 100,
-            imgUrl: camisa20,
-            quantidade: 0
+            imgUrl: camisa20 ,
+            tamanho: ""
           },
           {
             id:21,
             name: "Astronauta em chamas",
             value: 32,
-            imgUrl: camisa21,
-            quantidade: 0
+            imgUrl: camisa21 ,
+            tamanho: ""
           },
           {
             id:22,
             name:  "ET wars",
             value: 10000,
-            imgUrl: camisa22,
-            quantidade: 0
+            imgUrl: camisa22 ,
+            tamanho: ""
           },
           {
             id:23,
             name:  "Demon",
             value: 200,
             imgUrl: camisa23,
-            quantidade: 0
+            tamanho: ""
           },
           {
             id:24,
             name:  "Cérebro abduzido",
             value: 100,
             imgUrl: camisa24,
-            quantidade: 0
+            tamanho: ""
           }
         ],
+        carrinho: [],
         valorMinimo: 0,
         valorMaximo: 1000,
         valorNome: "",
-        ordenacao: ""
+        ordenacao: "",
+        quantidadeTotalProdutos: ""
     }
 
-    copararProdutos(produtos, produto) {
-        for(const i of produtos) {
-           if(JSON.stringify(produto) == JSON.stringify(i)){
-                return true;
-            }   
-        }
-        return false;
-    }
      componentDidMount() {
     
-      if(localStorage.getItem("Produtos")){
+      if(localStorage.getItem("Carrinho")){
              this.setState({
-                 produtos: JSON.parse(localStorage.getItem("Produtos"))
+                 carrinho: JSON.parse(localStorage.getItem("Carrinho"))
              })
+              
          }
          else{
-              localStorage.setItem("Produtos", JSON.stringify(this.state.produtos))
+              localStorage.setItem("Carrinho", JSON.stringify(this.state.carrinho))
          }
      }
      componentDidUpdate() {
-         localStorage.setItem("Produtos", JSON.stringify(this.state.produtos))
+         localStorage.setItem("Carrinho", JSON.stringify(this.state.carrinho))
     }
 
     handleMinimo = (event) => {
@@ -252,20 +315,95 @@ export default class Home extends React.Component{
     }
 
     compraProduto = (id) => {
-        const produtos = this.state.produtos;
-        produtos.forEach((item, index) => {
+      this.state.produtos.forEach((item) => {
              if(item.id === id){
-             let produtosAtualizado = [...this.state.produtos];
-                produtosAtualizado[index].quantidade =  produtosAtualizado[index].quantidade + 1;
-                this.setState({produtos: produtosAtualizado})
+               if(item.tamanho){
+                const produtoComprar = {
+                  produtoId: item.id,
+                  produtoName: item.name,
+                  produtoValue: item.value,
+                  produtoTamanho: item.tamanho
+                }
+                this.alterarCarrinho(produtoComprar);
              }
-        })
-        console.log(this.state.produtos);
+             else{
+                alert("Escolha um tamanho para a camisa que deseja");
+             }
+            }
+      })
     }
-
+      alterarCarrinho(produto) {
+      let carrinho = [... this.state.carrinho];
+      let quantidade;
+      let entrouNoIf = false;
+        for(let i=0; i < carrinho.length ; i++) {
+         quantidade = carrinho[i].quantidade;
+         produto.quantidade = carrinho[i].quantidade;
+            if(JSON.stringify(produto) === JSON.stringify(carrinho[i])){
+              carrinho = [... this.state.carrinho];
+              carrinho[i].quantidade = quantidade + 1;
+              this.setState({carrinho: carrinho});
+              localStorage.setItem("Carrinho", JSON.stringify(this.state.carrinho))
+              entrouNoIf = true;
+            }  
+        }
+        if(!entrouNoIf){
+            produto.quantidade = 1;
+            carrinho.push(produto);
+            this.setState({carrinho: [... this.state.carrinho, produto]});
+            localStorage.setItem("Carrinho", JSON.stringify(this.state.carrinho))
+           
+        }
+      // console.log(carrinho )
+  
+    }
+    
+    mudarTamanho = (id, tamanho) => {
+       let produtos = [... this.state.produtos];
+      // console.log(produtos[index], id)
+      
+      this.state.produtos.forEach((item) => {
+       if(item.id === id){
+        item.tamanho = tamanho;
+        //  alert(tamanho)
+        this.setState({produtos: [... produtos]});
+          // console.log(this.state.produtos)
+       }
+      })
+    }
+    quantidadeProdutos = () => {
+      let quantidade = 0, stringQuantidade= ""; 
+      (this.state.carrinho).forEach((item) => {
+          if(item.quantidade > 0){ 
+              quantidade += item.quantidade;
+          }            
+      })
+      if(quantidade <= 0){
+        stringQuantidade = "";
+      }
+      else if(quantidade > 0 && quantidade < 100){
+        stringQuantidade = `${quantidade}`;
+      }
+      else{
+        stringQuantidade = `99+`;
+      }
+      return stringQuantidade;
+  }
+  sliderTopo = () => {
+    return (<DivSlider>
+      <DivImagens>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      </DivImagens>
+  </DivSlider>
+  )
+  }
     render(){
 
         return (<DivContainerHome>
+          {this.sliderTopo()}
             <Filtro
            valorMinimo = {this.state.valorMinimo}
            valorMaximo = {this.state.valorMaximo}
@@ -276,15 +414,19 @@ export default class Home extends React.Component{
            handleNome = {this.handleNome}
            mudarOrdenacao = {this.mudarOrdenacao}
            mudarPagina = {this.props.mudarPagina}
+           quantidadeProdutos = {this.quantidadeProdutos}
            />
             <Produtos
+            produtos = {this.state.produtos}
             produto = {this.state.produtos}
             valorMinimo ={this.state.valorMinimo}
             valorMaximo ={this.state.valorMaximo}
             valorNome = {this.state.valorNome}
             compraProduto = {this.compraProduto}
-            
-           ordenacao = {this.state.ordenacao}
+            quantidadeProdutos = {this.quantidadeProdutos}
+            mudarTamanho= {this.mudarTamanho}
+             ordenacao = {this.state.ordenacao}
+
             >
             </Produtos>
         </DivContainerHome>)
