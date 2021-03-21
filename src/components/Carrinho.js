@@ -21,8 +21,10 @@ const DivTopo = styled.div`
     justify-content: center;
     align-items:center;
 
+    background-attachment: fixed;
     align-items:center;
     background-image: url(${fundo});
+    background-attachment: fixed;
     padding: 35px 0px;
     color: black;
     font-weight: 700;
@@ -57,12 +59,23 @@ const ListaProdutos = styled.div`
  text-align: center;
  width: 700px;
  align-self: center;
+ 
+@media(max-width: 700px) {
+    width: 100%;
+    
+    font-size: 0.9em;
+}
 `
 const DivTotal = styled.div`
  width: 700px;
  align-self: center;    
  display: flex;
  flex-direction:column;
+  
+@media(max-width: 700px) {
+    width: 100%;
+    font-size: 0.9em;
+}
 `
 const DivProdutoCarrinho = styled.div`
     /* margin: 10px; */
@@ -101,6 +114,7 @@ const ButaoFinalizar = styled.button`
     color: black;
     margin: auto;
     align-self: center;
+    margin-bottom: 25px;
     :hover{
         background-color: rgba(48,8,111,1);
         color: white;
@@ -111,19 +125,26 @@ const IconePlusRemove = styled.img`
 width: 25px;
 cursor: pointer;
 `
-const produtosInicial = JSON.parse(localStorage.getItem("Produtos"))
+const MensagemCentralizada = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+    font-size: 50px;
+`
+const carrinhoInicial = JSON.parse(localStorage.getItem("Carrinho"))
 
 
 export default class Carrinho extends React.Component {
    
     state = {
-        produtos: produtosInicial,
+        carrinho: carrinhoInicial,
+        finalizado: false
     }
     atualizarValor = () => {
         let valor = 0; 
-        (this.state.produtos).forEach((item) => {
+        (this.state.carrinho).forEach((item) => {
             if(item.quantidade > 0){ 
-                valor += item.value * item.quantidade;
+                valor += item.produtoValue * item.quantidade;
             }            
         })
        
@@ -133,37 +154,21 @@ export default class Carrinho extends React.Component {
 
     componentWillMount() {
         this.setState({
-            produtos: JSON.parse(localStorage.getItem("Produtos"))
+            carrinho: JSON.parse(localStorage.getItem("Carrinho"))
         })
     }
-    addProduto(id){
-        const produtos = this.state.produtos;
-
-        produtos.forEach((item, index) => {
-             if(item.id === id){
-             let produtosAtualizado = [...this.state.produtos];
-                produtosAtualizado[index].quantidade =  produtosAtualizado[index].quantidade + 1;
-                this.setState({produtos: produtosAtualizado
-                })
-             }
-        })
-        // console.log(this.state.produtos);
-        localStorage.setItem("Produtos", JSON.stringify(this.state.produtos))
-    }
-  
-    tirarProduto(id){
-        const produtos = this.state.produtos;
-
-        produtos.forEach((item, index) => {
-             if(item.id === id){
-             let produtosAtualizado = [...this.state.produtos];
-                produtosAtualizado[index].quantidade =  produtosAtualizado[index].quantidade - 1;
-                this.setState({produtos: produtosAtualizado
-                })
-             }
-        })
-        // console.log(this.state.produtos);
-        localStorage.setItem("Produtos", JSON.stringify(this.state.produtos))
+    addTirarProduto(id, index, AddOuTirar){
+        const carrinho = this.state.carrinho;
+      
+        if(carrinho[index].produtoId == id){
+            let carrinhoAtualizado = [...this.state.carrinho];
+            (AddOuTirar === "Add") ?   carrinhoAtualizado[index].quantidade++ : carrinhoAtualizado[index].quantidade--;
+            console.log(carrinhoAtualizado)
+            carrinhoAtualizado[index].quantidade <= 0 && carrinhoAtualizado.splice(index, 1);
+            this.setState({carrinho: carrinhoAtualizado})
+            console.log(carrinhoAtualizado)
+        }
+        localStorage.setItem("Carrinho", JSON.stringify(this.state.carrinho))
     }
     mostraBotaoFinalizar(){
         if(this.atualizarValor()){
@@ -172,32 +177,39 @@ export default class Carrinho extends React.Component {
                         <div>
                             <h3>Total</h3>
                         </div>
-                        <DivValor><h3>R$ {this.atualizarValor()}</h3></DivValor>
+                        <DivValor><h3>R$ {this.atualizarValor()},00</h3></DivValor>
                     </DivProdutoCarrinho>
          
                 
-                <ButaoFinalizar>Finalizar Compras</ButaoFinalizar> 
+                <ButaoFinalizar onClick={this.finalizaCompras}>Finalizar Compras</ButaoFinalizar> 
                 </DivTotal>
             )
         }
         else {
-        return (<h3>Seu carrinho esta vazio</h3>);
+             return (<MensagemCentralizada>Seu carrinho esta vazio</MensagemCentralizada>);
+             
     }
     }
-    
+    finalizaCompras = () => {
+        localStorage.setItem("Carrinho", JSON.stringify([]));
+        
+        this.setState({carrinho: JSON.parse(localStorage.getItem("Carrinho"))});
+        console.log(localStorage.getItem("Carrinho"))
+        alert("Obrigado por comprar conosco");
+    }
     listaProdutos = () =>{
-        const produtos = (this.state.produtos).map((item) => {
+        const produtos = (this.state.carrinho).map((item, index) => {
             if(item.quantidade > 0){ 
                 return (<DivProdutoCarrinho>
                 <div>
                     <DivQuantidade>
-                        <IconePlusRemove onClick={() => this.addProduto(item.id)} src={add}></IconePlusRemove>
+                        <IconePlusRemove onClick={() => this.addTirarProduto(item.produtoId, index, "Add")} src={add}></IconePlusRemove>
                         <h3>{item.quantidade}</h3>
-                        <IconePlusRemove onClick={() => this.tirarProduto(item.id)} src={remove}></IconePlusRemove>
+                        <IconePlusRemove onClick={() => this.addTirarProduto(item.produtoId, index, "Tirar")} src={remove}></IconePlusRemove>
                     </DivQuantidade>
-                    <h3>{item.name}</h3>
+                    <h3>{item.produtoName} - {item.produtoTamanho}</h3>
                 </div>
-                <DivValor><h3>R$ {item.value},00</h3></DivValor>
+                <DivValor><h3>R$ {item.produtoValue},00</h3></DivValor>
                 
             </DivProdutoCarrinho>)
             }
