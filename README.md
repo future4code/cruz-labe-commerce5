@@ -1,6 +1,8 @@
 Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
 
-http://exciting-horse.surge.sh/
+ATENÇÃO! LIMPE O LOCAL STORAGE ANTES DE USAR O SITE!
+
+http://cloistered-spade.surge.sh/
 
 Labenu Commerce - Grupo 5
 
